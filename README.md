@@ -12,9 +12,9 @@ In this step, we'll install, save, and require the npm packages we'll need.
 
 ### Instructions
 
-* Run `npm install --save express body-parser express-session dotenv`.
-* Open `server/index.js` and require all the packages at the top of the file.
-* create a `.env` and include the `SESSION_SECRET` and `SERVER_PORT`
+<!-- * Run `npm install --save express body-parser express-session dotenv`. -->
+<!-- * Open `server/index.js` and require all the packages at the top of the file. -->
+<!-- * create a `.env` and include the `SESSION_SECRET` and `SERVER_PORT` -->
 
 ### Solution
 
@@ -39,10 +39,10 @@ In this step, we'll create an express `app`, use our `body-parser` and `session`
 
 ### Instructions
 
-* Open `server/index.js`.
-* Create an express app.
-* Create middleware that use `body-parser` and `session`.
-  * Don't forget to pass in the configuration object into `session`. The object should have a `secret`, `resave`, and `saveUninitialized` parameter.
+<!-- * Open `server/index.js`. -->
+<!-- * Create an express app. -->
+<!-- * Create middleware that use `body-parser` and `session`. -->
+  <!-- * Don't forget to pass in the configuration object into `session`. The object should have a `secret`, `resave`, and `saveUninitialized` parameter. -->
 
 <details>
 
@@ -134,14 +134,14 @@ In this step, we'll add custom middleware that will check to see if a session ha
 
 ### Instructions
 
-* Create a folder called `middlewares` in `server/`.
-* Create a file called `checkForSession.js` in `server/middlewares/`.
-* Open `server/middlewares/checkForSession.js`.
-* Export a function that has a `req`, `res`, and `next` parameter.
-* Check if the `req.session` has a `user` object.
-  * If the session doesn't have it, add it to the session.
-    * User object: `{ username: '', cart: [], total: 0 }`.
-  * If the session does have it, call `next`.
+<!-- * Create a folder called `middlewares` in `server/`. -->
+<!-- * Create a file called `checkForSession.js` in `server/middlewares/`. -->
+<!-- * Open `server/middlewares/checkForSession.js`. -->
+<!-- * Export a function that has a `req`, `res`, and `next` parameter. -->
+<!-- * Check if the `req.session` has a `user` object. -->
+  <!-- * If the session doesn't have it, add it to the session. -->
+    <!-- * User object: `{ username: '', cart: [], total: 0 }`. -->
+  <!-- * If the session does have it, call `next`. -->
 
 <details>
 
@@ -213,8 +213,8 @@ In this step, we'll require our middleware in `index.js` and add it to `app`.
 
 ### Instructions
 
-* Require `server/middlewares/checkForSession.js`.
-* Use `app.use` to add `checkForSession`.
+<!-- * Require `server/middlewares/checkForSession.js`. -->
+<!-- * Use `app.use` to add `checkForSession`. -->
 
 ### Solution
 
@@ -254,17 +254,17 @@ In this step, we'll create a swag controller that can `read` the swag from `mode
 
 ### Instructions
 
-* Create a folder called `controllers` in `server/`.
-* Create a file called `swag_controller.js` in `server/controllers/`.
-* Open `server/controllers/swag_controller.js`.
-* Require `swag` from `server/models/swag`. 
-  * This is just an array of swag objects.
-* Export an object with a `read` method that has a `req`, `res`, and `next` parameter. 
-  * The `read` method should use `res` to send a status of 200 with the `swag` array.
-* Open `server/index.js`.
-* Require the swag controller.
-* Create a `GET` endpoint at `/api/swag` that calls the `read` method from the swag controller.
-* Hit `http://localhost:3000/api/swag` in postman to make sure you are getting the swag array.
+<!-- * Create a folder called `controllers` in `server/`. -->
+<!-- * Create a file called `swag_controller.js` in `server/controllers/`. -->
+<!-- * Open `server/controllers/swag_controller.js`. -->
+<!-- * Require `swag` from `server/models/swag`.  -->
+  <!-- * This is just an array of swag objects. -->
+<!-- * Export an object with a `read` method that has a `req`, `res`, and `next` parameter.  -->
+  <!-- * The `read` method should use `res` to send a status of 200 with the `swag` array. -->
+<!-- * Open `server/index.js`. -->
+<!-- * Require the swag controller. -->
+<!-- * Create a `GET` endpoint at `/api/swag` that calls the `read` method from the swag controller. -->
+<!-- * Hit `http://localhost:3000/api/swag` in postman to make sure you are getting the swag array. -->
 
 <details>
 
@@ -366,32 +366,32 @@ In this step, we'll create an authorization controller that can handle logging i
 
 ### Instructions
 
-* Create an `auth_controller.js` in `server/controllers/`.
-* Open `server/controllers/auth_controller.js`.
-* At the top of the file require users from `models/users`.
-  * This is where the users are kept after registering.
-  * A user object looks like: `{ id: integer, username: string, password: string }`
-* Underneath the require for `users`, add an `id` variable that equals `1`.
+<!-- * Create an `auth_controller.js` in `server/controllers/`. -->
+<!-- * Open `server/controllers/auth_controller.js`. -->
+<!-- * At the top of the file require users from `models/users`. -->
+  <!-- * This is where the users are kept after registering. -->
+  <!-- * A user object looks like: `{ id: integer, username: string, password: string }` -->
+<!-- * Underneath the require for `users`, add an `id` variable that equals `1`. -->
   * We'll increment this by one to make sure no users can have the same `id`.
-* Export an object with a `login`, `register`, `signout`, and `getUser` method.
-  * All methods should capture `req`, `res`, and `next` as parameters.
-* `login`:
-  * Should look on the request body for a `username` and `password`.
-  * Should check to see if a user from the `users` array matches that user/pass combination.
-  * If the method finds a user:
+<!-- * Export an object with a `login`, `register`, `signout`, and `getUser` method. -->
+  <!-- * All methods should capture `req`, `res`, and `next` as parameters. -->
+<!-- * `login`: -->
+  <!-- * Should look on the request body for a `username` and `password`. -->
+  <!-- * Should check to see if a user from the `users` array matches that user/pass combination. -->
+  <!-- * If the method finds a user:
     * Update the value of `username` to the user's username on the request session's user object.
     * Return a status of 200 with the request session's user object.
   * If the method doesn't find a user:
-    * Return a status of 500.
-* For simplicity, we aren't going to do any verification on register. The `register` method should just push an object with an `id`, `username`, and `password` to the `users` array. The method:
-  * Should look on the request body for a `username` and `password`.
-  * Should push to the `users` array.
-  * Should increment the value of the global `id` variable.
-  * Should update the value of `username` on the request session's user object.
-  * Should send a status of 200 with the request session's user object.
-* `signout` should destroy the session using `req.session.destroy()` and then return the `req.session` object.
+    * Return a status of 500. -->
+<!-- * For simplicity, we aren't going to do any verification on register. The `register` method should just push an object with an `id`, `username`, and `password` to the `users` array. The method: -->
+  <!-- * Should look on the request body for a `username` and `password`. -->
+  <!-- * Should push to the `users` array. -->
+  <!-- * Should increment the value of the global `id` variable. -->
+  <!-- * Should update the value of `username` on the request session's user object. -->
+  <!-- * Should send a status of 200 with the request session's user object. -->
+<!-- * `signout` should destroy the session using `req.session.destroy()` and then return the `req.session` object.
   * The return of this will be used for Unit Testing.
-* `getUser` should simply send a status of 200 along with the request session's user object.
+* `getUser` should simply send a status of 200 along with the request session's user object. -->
 
 <details>
 
@@ -438,7 +438,7 @@ module.exports = {
 
 Let's break down the file method by method. We'll begin with `getUser`. This method is responsible for reading the user object off of session and return it with a status of 200.
 
-```js
+<!-- ```js
 getUser: ( req, res, next ) => {
   const { session } = req;
   res.status(200).send( session.user );
@@ -453,10 +453,10 @@ signout: ( req, res, next ) => {
   session.destroy();
   res.status(200).send( session );
 }
-```
+``` -->
 
 Next up is `register`. We'll keep this method simple and won't check for any previous users with the same login information. This method should look for a `username` and `password` on the request body and then create a user object. It should use the global `id` variable for the `id`. After pushing the new user object to the `users` array it should increment the value of `id` by one so we can keep the value of `id` unique. It should then set the value of `username` on the request session's user object to the value of `username` from the request body. Finally the method should return the updated user object with a status of 200.
-
+<!-- 
 ```js
 register: ( req, res, next ) => {
   const { session } = req;
@@ -469,11 +469,11 @@ register: ( req, res, next ) => {
 
   res.status(200).send( session.user );
 }
-```
+``` -->
 
 Finally, let's focus on the `login` method. This method should use `username` and `password` from the request body to find a user object in the `users` array with the same user/pass combination. If it finds a user with that combination, it should update the value of `username` on the request session's user object to value of `username` from the request body. It should then send a status of 200 with the updated user object. If it doesn't find a user it should send a status of 500.
 
-```js
+<!-- ```js
 login: ( req, res, next ) => {
   const { session } = req;
   const { username, password } = req.body;
@@ -489,7 +489,7 @@ login: ( req, res, next ) => {
 }
 ```
 
-</details>
+</details> -->
 
 ### Solution
 
@@ -551,18 +551,18 @@ In this step, we'll require the auth controller in `server/index.js` and create 
 
 ### Instructions
 
-* Open `server/index.js`.
-* Require the `auth_controller.js` file.
-* Create the following endpoints: ( `request method`, `url`, `controller method` )
-  * `POST` - `/api/login` - `auth_controller.login`.
-  * `POST` - `/api/register` - `auth_controller.register`.
-  * `POST` - `/api/signout` - `auth_controller.signout`.
-  * `GET` - `/api/user` - `auth_controller.getUser`.
-* Test your endpoints using postman.
-  * Try registering a new user.
-  * Try logging in with that user.
-  * Try getting the session's information on the user ( /api/user ).
-  * Try signing out ( This should return nothing if the session was destroyed ).
+<!-- * Open `server/index.js`. -->
+<!-- * Require the `auth_controller.js` file. -->
+<!-- * Create the following endpoints: ( `request method`, `url`, `controller method` ) -->
+  <!-- * `POST` - `/api/login` - `auth_controller.login`. -->
+  <!-- * `POST` - `/api/register` - `auth_controller.register`. -->
+  <!-- * `POST` - `/api/signout` - `auth_controller.signout`. -->
+  <!-- * `GET` - `/api/user` - `auth_controller.getUser`. -->
+<!-- * Test your endpoints using postman. -->
+  <!-- * Try registering a new user. -->
+  <!-- * Try logging in with that user. -->
+  <!-- * Try getting the session's information on the user ( /api/user ). -->
+  <!-- * Try signing out ( This should return nothing if the session was destroyed ). -->
   
 ### Solution
 
@@ -616,28 +616,28 @@ In this step, we'll create a cart controller that can handle adding and deleting
 
 ### Instructions
 
-* Create a file called `cart_controller.js` in `server/controllers`.
-* Require `swag` from `models/swag.js`.
-  * This is just an array of swag objects.
-* Export an object with an `add`, `delete`, and `checkout` method.
-* Each method should capture `req`, `res`, and `next` as parameters.
-* `add`:
-  * Should check the request query for an `id`.
-  * Should use the `id` to see if it is already in the user's cart on session.
-    * If it is, just send a status 200 with the request session's user object.
-    * If it isn't, find the swag object from `models/swag` using the `id` and add it to the cart on session.
-      * Add the price of the swag to the total on the session.
-      * Send a status 200 with the request session's user object.
-* `remove`:
-  * Should check the request query for an `id`.
+<!-- * Create a file called `cart_controller.js` in `server/controllers`. -->
+<!-- * Require `swag` from `models/swag.js`. -->
+  <!-- * This is just an array of swag objects. -->
+<!-- * Export an object with an `add`, `delete`, and `checkout` method. -->
+<!-- * Each method should capture `req`, `res`, and `next` as parameters. -->
+<!-- * `add`: -->
+  <!-- * Should check the request query for an `id`. -->
+  <!-- * Should use the `id` to see if it is already in the user's cart on session. -->
+    <!-- * If it is, just send a status 200 with the request session's user object. -->
+    <!-- * If it isn't, find the swag object from `models/swag` using the `id` and add it to the cart on session. -->
+      <!-- * Add the price of the swag to the total on the session. -->
+      <!-- * Send a status 200 with the request session's user object. -->
+<!-- * `remove`: -->
+  <!-- * Should check the request query for an `id`.
   * Should use the `id` to remove the swag from cart and subtract it's price from the total.
-  * Should send status 200 with the request session's user object.
-* `checkout`:
+  * Should send status 200 with the request session's user object. -->
+<!-- * `checkout`:
   * Should set the cart back to an empty array on session.
   * Should set the total back to 0 on session.
   * Should send status 200 with the request session's user object.
 
-<details>
+<details> -->
 
 <summary> Detailed Instructions </summary>
 
@@ -784,8 +784,8 @@ In this step, we'll require the cart controller and create endpoints to hit ever
 
 ### Instructions
 
-* Open `server/index.js`.
-* Require the cart controller.
+<!-- * Open `server/index.js`. -->
+<!-- * Require the cart controller.
 * Create the following endpoints: ( `request method`, `url`, `controller method` )
   * `POST` - `/api/cart` - `cart_controller.add`.
   * `POST` - `/api/cart/checkout` - `cart_controller.checkout`.
@@ -793,7 +793,7 @@ In this step, we'll require the cart controller and create endpoints to hit ever
 * Test your endpoints using postman.
   * Try adding an item to the cart by `id` ( 1 - 35 ).
   * Try remove an item from the cart by `id` ( 1 - 35 ).
-  * Try checking out.
+  * Try checking out. -->
 
 ### Solution
 
@@ -853,15 +853,15 @@ In this step, we'll create a search controller that will also to filter swag by 
 
 ### Instructions
 
-* Create a `search_controller.js` in `server/controllers/`.
+<!-- * Create a `search_controller.js` in `server/controllers/`.
 * Open `server/controllers/search_controller.js`.
 * Require `swag` from `models/swag.js`.
-  * This is just an array of swag objects.
-* Export an object with a search method.
-* This method should capture `req`, `res`, and `next` as parameters.
-* This method should check for a `category` from the request query.
-* This method should return a status 200 with the entire swag array if the category doesn't exist.
-* This method should return a status 200 with the filtered array of swag by `category` if it does exist.
+  * This is just an array of swag objects. -->
+<!-- * Export an object with a search method. -->
+<!-- * This method should capture `req`, `res`, and `next` as parameters.
+* This method should check for a `category` from the request query. -->
+<!-- * This method should return a status 200 with the entire swag array if the category doesn't exist.
+* This method should return a status 200 with the filtered array of swag by `category` if it does exist. -->
 
 <details>
 
